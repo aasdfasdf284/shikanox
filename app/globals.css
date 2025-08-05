@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Outfit', 'Noto Sans JP', system-ui, -apple-system, sans-serif;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', 'Noto Sans JP', system-ui, sans-serif;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    letter-spacing: -0.025em;
+  }
+  
+  code, pre {
+    font-family: 'JetBrains Mono', monospace;
+  }
+  
+  /* 日本語フォントの最適化 */
+  .font-japanese {
+    font-family: 'Noto Sans JP', 'Outfit', system-ui, sans-serif;
+  }
+  
+  /* 英語フォントの最適化 */
+  .font-english {
+    font-family: 'Outfit', 'Noto Sans JP', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium transition-all duration-300 ease-out;
+  }
+  
+  .btn-primary {
+    @apply bg-gradient-to-r from-slate-800 to-slate-700 text-white shadow-lg hover:shadow-xl hover:-translate-y-0.5 border border-slate-600/50;
+  }
+  
+  .btn-secondary {
+    @apply bg-white/5 text-white border border-white/20 backdrop-blur-sm hover:bg-white/10 hover:border-white/30;
+  }
+  
+  .btn-outline {
+    @apply border border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400;
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent;
+  }
+  
+  .gradient-bg {
+    @apply bg-gradient-to-br from-slate-50 via-white to-slate-100;
+  }
+  
+  .card {
+    @apply bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border border-slate-200/50;
+  }
+  
+  .glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .font-display {
+    font-family: 'Outfit', 'Noto Sans JP', system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  
+  .font-heading {
+    font-family: 'Outfit', 'Noto Sans JP', system-ui, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+  
+  .font-body {
+    font-family: 'Noto Sans JP', 'Outfit', system-ui, sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+  
+  .font-accent {
+    font-family: 'Outfit', 'Noto Sans JP', system-ui, sans-serif;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+} 
