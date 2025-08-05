@@ -45,7 +45,7 @@ const ContactForm = () => {
     setStatus({ type: 'loading', message: '送信中...' })
 
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch('/api/contact-xserver', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
