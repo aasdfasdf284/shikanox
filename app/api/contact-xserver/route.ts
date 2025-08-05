@@ -6,17 +6,32 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const { name, company, email, message } = body
 
+    console.log('Contact form submission received:', { name, company, email, message: message ? 'provided' : 'empty' })
+
     // バリデーション
     if (!name || !company || !email) {
+      console.log('Validation failed: missing required fields')
       return NextResponse.json(
         { error: '必須項目が入力されていません。' },
         { status: 400 }
       )
     }
 
+    // 環境変数の確認
+    console.log('Checking environment variables...')
+    if (!process.env.XSERVER_EMAIL_PASS) {
+      console.error('XSERVER_EMAIL_PASS environment variable is not set')
+      return NextResponse.json(
+        { error: '環境変数の設定が必要です。管理者にお問い合わせください。' },
+        { status: 500 }
+      )
+    }
+    console.log('Environment variables are set correctly')
+
     // Xserver SMTPの設定
+    console.log('Setting up Xserver SMTP transporter...')
     const transporter = nodemailer.createTransport({
-      host: 'sv1.xserver.jp', // XserverのSMTPサーバー
+      host: 'sv7209.xserver.jp', // Xserverの正しいSMTPサーバー
       port: 587,
       secure: false, // TLSを使用
       auth: {
@@ -27,6 +42,7 @@ export async function POST(request: NextRequest) {
         rejectUnauthorized: false, // 証明書エラーを無視（必要に応じて）
       },
     })
+    console.log('SMTP transporter configured')
 
     // メールの内容
     const mailOptions = {
@@ -78,11 +94,19 @@ export async function POST(request: NextRequest) {
     }
 
     // メール送信
+    console.log('Attempting to send email...')
+    let emailSent = false
     try {
       await transporter.sendMail(mailOptions)
       console.log('Email sent successfully via Xserver:', { name, company, email })
+      emailSent = true
     } catch (emailError) {
       console.error('Xserver email sending failed:', emailError)
+      console.error('Error details:', {
+        message: emailError.message,
+        code: emailError.code,
+        command: emailError.command
+      })
       // メール送信に失敗しても、フォーム送信は成功として扱う
       console.log('Contact form submission (Xserver failed):', {
         name,
@@ -92,8 +116,11 @@ export async function POST(request: NextRequest) {
         timestamp: new Date().toISOString(),
       })
     }
+    
+    console.log('Email sent status:', emailSent)
 
     // 成功レスポンス
+    console.log('Returning success response')
     return NextResponse.json(
       { 
         success: true, 
