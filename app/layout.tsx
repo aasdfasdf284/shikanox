@@ -84,7 +84,7 @@ export default function RootLayout({
     },
     contactPoint: {
       '@type': 'ContactPoint',
-      email: 'hello@shikanox.jp',
+      email: 'hello@shikanox.io',
       contactType: 'customer service',
     },
     sameAs: [

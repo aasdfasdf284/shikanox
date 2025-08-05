@@ -78,7 +78,7 @@ const Footer = () => {
                 <Mail className="w-5 h-5 text-slate-300 mr-3" />
                 <div>
                   <p className="text-xs text-slate-400 uppercase tracking-wide">メール</p>
-                  <p className="text-sm text-slate-200 font-medium">hello@shikanox.jp</p>
+                  <p className="text-sm text-slate-200 font-medium">hello@shikanox.io</p>
                 </div>
               </div>
             </motion.div>
